@@ -5,20 +5,22 @@ import memesData from './memesData'; //import this file to get the memes when bu
 //meme component that will handle meme functionality
 
 function Meme () {
-  const [memeImage, setMemeImage] = useState("") //state to hold meme image URL
-  const [topText, setTopText] = useState("") //state to hold top text
-  const [bottomText, setBottomText] = useState("") //state to hold bottom text
+  const [memeImage, setMemeImage] = useState(""); //state to hold meme image URL
+  const [topText, setTopText] = useState(""); //state to hold top text
+  const [bottomText, setBottomText] = useState(""); //state to hold bottom text
+
+  //Button click handler
+  const getMemeImage = () => {
+    const memesArray = memesData.data.memes;
+    const randomNumber = Math.floor(Math.random() * memesArray);
+    const url = memesArray[randomNumber].url; //get the URL of a random image
+    setMemeImage(url); //update state with new image url 
+  };
 }
 
 function App() {
 
-  //Button click handler
-  const getMemeImage = () => {
-    const memesArray = memesData.data.memes
-    const randomNumber = Math.floor(Math.random() * memesArray)
-    const url = memesArray[randomNumber].url
-    console.log(url)
-  }
+
 
   return (
     <>
