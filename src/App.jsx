@@ -47,8 +47,6 @@ function Meme () {
 
 function App() {
 
-
-
   return (
     <>
       <header className="header">
@@ -61,7 +59,7 @@ function App() {
         <h4 className="header--project">React Course - Project 3</h4>
       </header>
 
-      
+      <Meme />
     </>
   );
 }
