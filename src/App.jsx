@@ -15,13 +15,14 @@ function App() {
         <h4 className="header--project">React Course - Project 3</h4>
       </header>
 
-      {/*Form with two input fields and a button*/}
+      {/*Form with two input fields and a button, also change form to div so button can get new image 
+      we are not gathering data and submitting it somewhere*/}
       <main>
-        <form className="form">
+        <div className="form">
           <input type="text" placeholder="Top text" className="form--input"></input>
           <input type="text" placeholder="Bottom text" className="form--input"></input>
           <button className="form--button"> Get a new meme image 🖼</button>
-        </form>
+        </div>
       </main>
     </>
   );
