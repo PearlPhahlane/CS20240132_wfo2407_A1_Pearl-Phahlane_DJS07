@@ -16,6 +16,21 @@ function Meme () {
     const url = memesArray[randomNumber].url; //get the URL of a random image
     setMemeImage(url); //update state with new image url 
   };
+  return (
+    {/*Form with two input fields and a button, also change form to div so button can get new image 
+      we are not gathering data and submitting it somewhere*/}
+      <main>
+        <div className="form">
+          <input type="text" placeholder="Top text" className="form--input"></input>
+          <input type="text" placeholder="Bottom text" className="form--input"></input>
+          <button 
+          className="form--button"
+          onClick={getMemeImage}
+          > Get a new meme image 🖼</button>
+        </div>
+      </main>
+  )
+
 }
 
 function App() {
@@ -34,18 +49,7 @@ function App() {
         <h4 className="header--project">React Course - Project 3</h4>
       </header>
 
-      {/*Form with two input fields and a button, also change form to div so button can get new image 
-      we are not gathering data and submitting it somewhere*/}
-      <main>
-        <div className="form">
-          <input type="text" placeholder="Top text" className="form--input"></input>
-          <input type="text" placeholder="Bottom text" className="form--input"></input>
-          <button 
-          className="form--button"
-          onClick={getMemeImage}
-          > Get a new meme image 🖼</button>
-        </div>
-      </main>
+      
     </>
   );
 }
