@@ -21,8 +21,12 @@ function Meme () {
       we are not gathering data and submitting it somewhere*/}
       <main>
         <div className="form">
-          <input type="text" placeholder="Top text" className="form--input"></input>
-          <input type="text" placeholder="Bottom text" className="form--input"></input>
+          <input type="text" placeholder="Top text" className="form--input" value={topText} onChange={ (e) =>
+            setTopText(e.target.value)} //update top text on change
+          ></input>
+          <input type="text" placeholder="Bottom text" className="form--input" value={bottomText} onChange={ (e) =>
+            setBottomText(e.target.value)} //update bottom text on change 
+          ></input>
           <button 
           className="form--button"
           onClick={getMemeImage}
