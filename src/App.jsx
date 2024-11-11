@@ -1,7 +1,13 @@
 import React from 'react'; //had to import to remove errors in vs code
 import trollFace from "./images/troll-face.png"; //had to import with a descriptive name
+import memesData from './memesData'; //import this file to get the memes when button is clicked 
 
 function App() {
+
+  //Button click handler
+  const handleButtonClick = () => {
+    console.log("hello")
+  }
 
   return (
     <>
@@ -21,7 +27,11 @@ function App() {
         <div className="form">
           <input type="text" placeholder="Top text" className="form--input"></input>
           <input type="text" placeholder="Bottom text" className="form--input"></input>
-          <button className="form--button"> Get a new meme image 🖼</button>
+          <button 
+          type="button"
+          className="form--button"
+          onClick={handleButtonClick}
+          > Get a new meme image 🖼</button>
         </div>
       </main>
     </>
