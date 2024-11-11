@@ -12,7 +12,7 @@ function Meme () {
   //Button click handler
   const getMemeImage = () => {
     const memesArray = memesData.data.memes;
-    const randomNumber = Math.floor(Math.random() * memesArray);
+    const randomNumber = Math.floor(Math.random() * memesArray.length);
     const url = memesArray[randomNumber].url; //get the URL of a random image
     setMemeImage(url); //update state with new image url 
   };
