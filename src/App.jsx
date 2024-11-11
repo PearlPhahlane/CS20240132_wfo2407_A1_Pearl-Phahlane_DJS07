@@ -5,25 +5,39 @@ import memesData from './memesData'; //import this file to get the memes when bu
 //meme component that will handle meme functionality
 
 function Meme () {
-  const [memeImage, setMemeImage] = useState(""); //state to hold meme image URL
-  const [topText, setTopText] = useState(""); //state to hold top text
-  const [bottomText, setBottomText] = useState(""); //state to hold bottom text
+  //using one state object to hold both text and meme image URL
+  const [meme, setMeme] = useState({
+    topText: "",
+    bottomText: "",
+    memeImage: "",
+  });
 
-  //Button click handler
+  //Button click handler to get random meme image
   const getMemeImage = () => {
     const memesArray = memesData.data.memes;
     const randomNumber = Math.floor(Math.random() * memesArray.length);
     const url = memesArray[randomNumber].url; //get the URL of a random image
-    setMemeImage(url); //update state with new image url 
+    setMeme (prevMeme => ({
+      ...prevMeme,
+      memeImage: url
+    }));
   };
+
+  function handleChange(event) {
+    const { name, value } = event.target;
+    setMeme(prevMeme => ({
+      ...prevMeme,
+      [name]:value
+    }));
+  }
+
+
   return (
       <main>
         <div className="form">
-          <input type="text" placeholder="Top text" className="form--input" value={topText} onChange={ (e) =>
-            setTopText(e.target.value)} //update top text on change
+          <input type="text" placeholder="Top text" className="form--input" value={meme.topText} onChange={handleChange} //update top text on change
           ></input>
-          <input type="text" placeholder="Bottom text" className="form--input" value={bottomText} onChange={ (e) =>
-            setBottomText(e.target.value)} //update bottom text on change 
+          <input type="text" placeholder="Bottom text" className="form--input" value={meme.bottomText} onChange={handleChange} //update bottom text on change 
           ></input>
 
           {/* Button to trigger meme image change*/}
@@ -34,11 +48,11 @@ function Meme () {
         </div>
 
         {/* Display meme iamge if it exist*/}
-        {memeImage && (
+        {meme.memeImage && (
           <div className='meme'> 
-            <img src={memeImage} alt="Meme" className='meme-image'/>
-            <h2 className='meme--text top'>{topText}</h2>
-            <h2 className='meme--text bottom'>{bottomText}</h2>
+            <img src={meme.memeImage} alt="Meme" className='meme-image'/>
+            <h2 className='meme--text top'>{meme.topText}</h2>
+            <h2 className='meme--text bottom'>{meme.bottomText}</h2>
           </div>
         )}
       </main>
