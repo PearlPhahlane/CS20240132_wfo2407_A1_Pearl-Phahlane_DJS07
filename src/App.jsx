@@ -17,8 +17,6 @@ function Meme () {
     setMemeImage(url); //update state with new image url 
   };
   return (
-    {/*Form with two input fields and a button, also change form to div so button can get new image 
-      we are not gathering data and submitting it somewhere*/}
       <main>
         <div className="form">
           <input type="text" placeholder="Top text" className="form--input" value={topText} onChange={ (e) =>
@@ -27,14 +25,24 @@ function Meme () {
           <input type="text" placeholder="Bottom text" className="form--input" value={bottomText} onChange={ (e) =>
             setBottomText(e.target.value)} //update bottom text on change 
           ></input>
+
+          {/* Button to trigger meme image change*/}
           <button 
           className="form--button"
           onClick={getMemeImage}
           > Get a new meme image 🖼</button>
         </div>
-      </main>
-  )
 
+        {/* Display meme iamge if it exist*/}
+        {memeImage && (
+          <div className='meme'> 
+            <img src={memeImage} alt="Meme" className='meme-image'/>
+            <h2 className='meme--text top'>{topText}</h2>
+            <h2 className='meme--text bottom'>{bottomText}</h2>
+          </div>
+        )}
+      </main>
+  );
 }
 
 function App() {
