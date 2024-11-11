@@ -1,6 +1,14 @@
-import React, {useState} from 'react'; //had to import to remove errors in vs code
+import React, {useState} from 'react'; //had to import to remove errors in vs code also import useState 
 import trollFace from "./images/troll-face.png"; //had to import with a descriptive name
 import memesData from './memesData'; //import this file to get the memes when button is clicked 
+
+//meme component that will handle meme functionality
+
+function Meme () {
+  const [memeImage, setMemeImage] = useState("") //state to hold meme image URL
+  const [topText, setTopText] = useState("") //state to hold top text
+  const [bottomText, setBottomText] = useState("") //state to hold bottom text
+}
 
 function App() {
 
