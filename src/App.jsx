@@ -1,6 +1,6 @@
-import React, {useState} from 'react'; //had to import to remove errors in vs code also import useState 
+import React, {useState, useEffect } from 'react'; //had to import to remove errors in vs code also import useState 
 import trollFace from "./images/troll-face.png"; //had to import with a descriptive name
-import memesData from './memesData'; //import this file to get the memes when button is clicked 
+//import memesData from './memesData'; //import this file to get the memes when button is clicked 
 
 //meme component that will handle meme functionality
 
@@ -9,53 +9,78 @@ function Meme () {
   const [meme, setMeme] = useState({
     topText: "",
     bottomText: "",
-    memeImage: "",
+    randomImage: "http://i.imgflip.com/1bij.jpg", //initial meme image
   });
 
+  const [allMemes, setAllMemes] = useState([]); //this is State for all meme data
+
+  //fetch memes data from API
+  useEffect(() => {
+    fetch("https://api.imgflip.com/get_memes")
+      .then((res) => res.json())
+      .then((data) => {
+        // Successfully fetched the data, set the memes into the state
+        setAllMemes(data.data.memes);
+      })
+      .catch((error) => {
+        console.error("Error fetching meme data:", error);
+      });
+  }, []);; //empty dependancy array means this effect runs once when component mounts
+
   //Button click handler to get random meme image
-  const getMemeImage = () => {
-    const memesArray = memesData.data.memes;
-    const randomNumber = Math.floor(Math.random() * memesArray.length);
-    const url = memesArray[randomNumber].url; //get the URL of a random image
-    setMeme (prevMeme => ({
+  function getMemeImage(event) {
+    event.preventDefault();
+    const randomNumber = Math.floor(Math.random() * allMemes.length);
+    const url = allMemes[randomNumber].url; //get the URL of a random image
+    setMeme((prevMeme) => ({
       ...prevMeme,
-      memeImage: url
+      randomImage: url,
     }));
   };
 
   function handleChange(event) {
     const { name, value } = event.target;
-    setMeme(prevMeme => ({
+    setMeme((prevMeme) => ({
       ...prevMeme,
-      [name]:value
+      [name]: value,
     }));
   }
 
-
   return (
-      <main>
-        <div className="form">
-          <input type="text" placeholder="Top text" className="form--input" value={meme.topText} onChange={handleChange} //update top text on change
-          ></input>
-          <input type="text" placeholder="Bottom text" className="form--input" value={meme.bottomText} onChange={handleChange} //update bottom text on change 
-          ></input>
+    <main>
+      <div className="form">
+        <input
+          type="text"
+          placeholder="Top text"
+          className="form--input"
+          name='topText'
+          value={meme.topText}
+          onChange={handleChange} //update top text on change
+        ></input>
+        <input
+          type="text"
+          placeholder="Bottom text"
+          className="form--input"
+          value={meme.bottomText}
+          name='bottomText'
+          onChange={handleChange} //update bottom text on change
+        ></input>
 
-          {/* Button to trigger meme image change*/}
-          <button 
-          className="form--button"
-          onClick={getMemeImage}
-          > Get a new meme image 🖼</button>
+        {/* Button to trigger meme image change*/}
+        <button className="form--button" onClick={getMemeImage}>
+          Get a new meme image 🖼
+        </button>
+      </div>
+
+      {/* Display meme iamge if it exist*/}
+      {meme.randomImage && (
+        <div className="meme">
+          <img src={meme.randomImage} className="meme-image" />
+          <h2 className="meme--text top">{meme.topText}</h2>
+          <h2 className="meme--text bottom">{meme.bottomText}</h2>
         </div>
-
-        {/* Display meme iamge if it exist*/}
-        {meme.memeImage && (
-          <div className='meme'> 
-            <img src={meme.memeImage} alt="Meme" className='meme-image'/>
-            <h2 className='meme--text top'>{meme.topText}</h2>
-            <h2 className='meme--text bottom'>{meme.bottomText}</h2>
-          </div>
-        )}
-      </main>
+      )}
+    </main>
   );
 }
 
