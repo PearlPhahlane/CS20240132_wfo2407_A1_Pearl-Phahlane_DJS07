@@ -1,12 +1,15 @@
-import React from 'react'; //had to import to remove errors in vs code
+import React, {useState} from 'react'; //had to import to remove errors in vs code
 import trollFace from "./images/troll-face.png"; //had to import with a descriptive name
 import memesData from './memesData'; //import this file to get the memes when button is clicked 
 
 function App() {
 
   //Button click handler
-  const handleButtonClick = () => {
-    console.log("hello")
+  const getMemeImage = () => {
+    const memesArray = memesData.data.memes
+    const randomNumber = Math.floor(Math.random() * memesArray)
+    const url = memesArray[randomNumber].url
+    console.log(url)
   }
 
   return (
@@ -28,9 +31,8 @@ function App() {
           <input type="text" placeholder="Top text" className="form--input"></input>
           <input type="text" placeholder="Bottom text" className="form--input"></input>
           <button 
-          type="button"
           className="form--button"
-          onClick={handleButtonClick}
+          onClick={getMemeImage}
           > Get a new meme image 🖼</button>
         </div>
       </main>
