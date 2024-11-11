@@ -6,14 +6,23 @@ function App() {
   return (
     <>
       <header className="header">
-          <img 
-              src= {trollFace} //had to use the descriptive name from the import for image to show
-              className="header--image"
-              alt= "Meme Generator Logo"
-          />
-          <h2 className="header--title">Meme Generator</h2>
-          <h4 className="header--project">React Course - Project 3</h4>
-      </header> 
+        <img
+          src={trollFace} //had to use the descriptive name from the import for image to show
+          className="header--image"
+          alt="Meme Generator Logo"
+        />
+        <h2 className="header--title">Meme Generator</h2>
+        <h4 className="header--project">React Course - Project 3</h4>
+      </header>
+
+      {/*Form with two input fields and a button*/}
+      <main>
+        <form>
+          <input></input>
+          <input></input>
+          <button></button>
+        </form>
+      </main>
     </>
   );
 }
