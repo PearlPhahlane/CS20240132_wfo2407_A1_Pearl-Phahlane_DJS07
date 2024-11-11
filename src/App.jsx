@@ -1,6 +1,5 @@
 import React, {useState, useEffect } from 'react'; //had to import to remove errors in vs code also import useState 
 import trollFace from "./images/troll-face.png"; //had to import with a descriptive name
-//import memesData from './memesData'; //import this file to get the memes when button is clicked 
 
 //meme component that will handle meme functionality
 
@@ -16,15 +15,20 @@ function Meme () {
 
   //fetch memes data from API
   useEffect(() => {
-    fetch("https://api.imgflip.com/get_memes")
-      .then((res) => res.json())
-      .then((data) => {
-        // Successfully fetched the data, set the memes into the state
-        setAllMemes(data.data.memes);
-      })
-      .catch((error) => {
+    //using asynchronous function
+  
+    //define an async function inside useEffect hook
+    const getMemes = async () => {
+      try {
+        const res = await fetch("https://api.imgflip.com/get_memes");
+        const data = await res.json();
+        setAllMemes(data.data.memes); //set memes data in state
+      } catch (error) {
         console.error("Error fetching meme data:", error);
-      });
+      }
+    };
+    //call the async function
+    getMemes();
   }, []);; //empty dependancy array means this effect runs once when component mounts
 
   //Button click handler to get random meme image
